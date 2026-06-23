@@ -100,6 +100,9 @@ payflow-fraud-lakehouse/
     app.py
   screenshots/
     dashboard-overview.png
+    executive-overview.png
+    detection-lab.png
+    fraud-drivers.png
   sql/
     silver_transactions.sql
     silver_accounts.sql
@@ -210,9 +213,25 @@ streamlit run dashboard/app.py
 
 The dashboard is designed to explain fraud behavior, not just display counts.
 
-![PayFlow dashboard overview](screenshots/dashboard-overview.png)
+### Dashboard Screenshots
 
-The screenshot above shows the Executive Overview page. It summarizes the complete clean dataset after quality checks: `6,362,604` valid transactions, `8,197` fraud cases, a `0.129%` fraud rate, about `$12.06B` in fraud amount, a P99 transaction amount of about `$1.62M`, and only `16` transactions marked by the original source flag.
+Executive Overview:
+
+![Executive overview dashboard](screenshots/executive-overview.png)
+
+This page summarizes the complete clean dataset after quality checks: `6,362,604` valid transactions, `8,197` fraud cases, a `0.129%` fraud rate, about `$12.06B` in fraud amount, a P99 transaction amount of about `$1.62M`, and only `16` transactions marked by the original source flag. It also shows transaction-type fraud risk, day/hour fraud heatmap, and daily fraud-rate trend.
+
+Detection Lab:
+
+![Detection lab dashboard](screenshots/detection-lab.png)
+
+This page compares the original PaySim source flag against a custom alert rule. It shows why precision alone is not enough: the source flag has `100.00%` precision but only `0.20%` recall, while the custom rule captures about `$8.02B` in fraud amount with higher recall.
+
+Fraud Drivers:
+
+![Fraud drivers dashboard](screenshots/fraud-drivers.png)
+
+This page explains which behaviors are most strongly associated with fraud. It ranks signals by fraud lift, shows the amount-decile risk curve, and displays the detailed signal table used to interpret fraud patterns.
 
 Dashboard pages:
 
@@ -238,6 +257,8 @@ Interactive filters:
 The dashboard reveals that fraud is not evenly distributed across the dataset. Most transaction volume is normal, but fraud is concentrated in specific transaction types, amount bands, and balance behaviors.
 
 ### 1. Overall Fraud Is Rare But High Value
+
+![Executive overview dashboard](screenshots/executive-overview.png)
 
 | Metric | Finding |
 | --- | ---: |
@@ -273,6 +294,8 @@ Interpretation:
 
 ### 3. Balance Behavior Is A Strong Fraud Signal
 
+![Fraud drivers dashboard](screenshots/fraud-drivers.png)
+
 The Fraud Drivers page shows that certain account-balance patterns are highly predictive in this synthetic dataset.
 
 | Signal | Transactions matching signal | Fraud cases captured | Fraud rate inside signal | Fraud captured |
@@ -291,6 +314,8 @@ Interpretation:
 - These patterns are useful for learning fraud analytics, but in a real production dataset they should be validated carefully because synthetic data can contain very clean rule-like behavior.
 
 ### 4. The Original Source Fraud Flag Is Too Conservative
+
+![Detection lab dashboard](screenshots/detection-lab.png)
 
 The Detection Lab compares the original `isFlaggedFraud` field against the actual fraud labels.
 
