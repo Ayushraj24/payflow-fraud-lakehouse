@@ -1,0 +1,16 @@
+.DS_Store
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Local generated lakehouse outputs
+pipeline_runs.duckdb*
+data/raw/*.csv
+data/bronze/
+data/silver/
+data/gold/
+data/quarantine/
+
+screenshots/dashboard-current.png
+screenshots/dashboard-expanded.png
