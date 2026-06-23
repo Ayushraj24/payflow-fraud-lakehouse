@@ -162,7 +162,3 @@ The final project should demonstrate a realistic fraud analytics workflow:
 4. Business-facing fraud metrics are calculated.
 5. Risk patterns and account priorities are visualized.
 6. Fraud detection rules are evaluated with measurable outcomes.
-
-## 14. Resume Summary
-
-Built a local DuckDB lakehouse for mobile-money fraud analytics using 6M synthetic transactions. Implemented raw, bronze, silver, and gold layers, Parquet storage, data quality checks, quarantine handling, reusable SQL transformations, pipeline run metadata, and a Streamlit dashboard for fraud KPIs, risk drivers, high-risk accounts, and alert-rule evaluation.
